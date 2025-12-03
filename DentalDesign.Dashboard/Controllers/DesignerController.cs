@@ -176,13 +176,19 @@ namespace DentalDesign.Dashboard.Controllers
 
             if (!result.IsSuccess)
             {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return BadRequest(result.Message); // 400
                 TempData["Error"] = result.Message;
                 return RedirectToAction("Index");
             }
 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return Ok(new { isSuccess = true, message = result.Message }); // 200
+
             TempData["Success"] = result.Message;
             return RedirectToAction("Index");
         }
+        
 
         [HttpPost]
         public async Task<IActionResult> DeleteSelected(string ids)

@@ -67,15 +67,15 @@
                                     @* <li><a class="dropdown-item" asp-controller="Supervisor" asp-action="Delete" asp-route-id="@sup.Id">Delete</a></li> *@
                                     <!-- Delete (POST) -->
                                     <li>
-                                        <form asp-controller="Supervisor" asp-action="Delete" method="post">
-                                            <input type="hidden" name="id" value="@sup.Id" />
-                                            <button type="button"
-                                                    class="dropdown-item text-danger"
-                                                    onclick="openDeleteSingle('@sup.Id')">
-                                                Delete
-                                            </button>
-
-                                        </form>
+                                    <button type="button"
+                                            class="dropdown-item text-danger"
+                                            onclick="openDeleteSingle('@sup.Id', {
+                                            endpoint: '@Url.Action("Delete", "Supervisor")',
+                                            title: 'Delete Supervisor',
+                                             message: 'Are you sure you want to delete @sup.FullNameEn?'
+                                         })">
+                                        Delete
+                                    </button>
                                     </li>
                                     <li><a class="dropdown-item" asp-controller="Supervisor" asp-action="AddDesigner" asp-route-supervisorId="@sup.Id">Add Designer</a></li>
                                     <li><a class="dropdown-item" asp-controller="Supervisor" asp-action="Block" asp-route-id="@sup.Id">Block</a></li>

@@ -73,15 +73,15 @@
                                 </li>
                                 <!-- Delete (POST) -->
                                 <li>
-                                    <form asp-controller="Designer" asp-action="Delete" method="post">
-                                        <input type="hidden" name="id" value="@des.Id" />
-                                        <button type="button"
-                                                class="dropdown-item text-danger"
-                                                onclick="openDeleteSingle('@des.Id')">
-                                            Delete
-                                        </button>
-
-                                    </form>
+                                    <button type="button"
+                                            class="dropdown-item text-danger"
+                                            onclick="openDeleteSingle('@des.Id', {
+                                                    endpoint: '@Url.Action("Delete", "Designer")',
+                                                    title: 'Delete Designer',
+                                                             message: 'Are you sure you want to delete @des.FullNameEn?'
+                                                 })">
+                                        Delete
+                                    </button>
                                 </li>
 
                             </ul>
