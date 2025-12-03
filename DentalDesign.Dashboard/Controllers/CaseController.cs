@@ -1,4 +1,5 @@
-﻿using Case.Application.Features.Case.Query.GetCases;
+﻿using Azure;
+using Case.Application.Features.Case.Query.GetCases;
 using IdentityHelper.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,11 @@ namespace DentalDesign.Dashboard.Controllers
         }
         public IActionResult Index()
         {
+            // لو الطلب AJAX → رجّع Partial
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView("_IndexPartial");
+
+            // لو الطلب عادي → رجّع صفحة كاملة بالـ Layout
             return View();
         }
 

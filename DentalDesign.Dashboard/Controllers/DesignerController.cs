@@ -38,12 +38,21 @@ namespace DentalDesign.Dashboard.Controllers
             ViewBag.SearchName = query.Name;
             ViewBag.SearchStatus = query.Status;
 
+            // لو الطلب AJAX → رجّع Partial
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView("_IndexPartial", response?.Data);
+
+            // لو الطلب عادي → رجّع صفحة كاملة بالـ Layout
             return View(response.Data);
         }
 
         public IActionResult Create()
         {
-            return View();
+            var model = new UserCreateViewModel();
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView("_CreatePartial", model);
+
+            return View(model);
         }
 
         [HttpPost]
@@ -51,7 +60,12 @@ namespace DentalDesign.Dashboard.Controllers
         public async Task<IActionResult> Create(UserCreateViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return PartialView("_CreatePartial", model);
+
                 return View(model);
+            }
 
             // تحويل ViewModel لـ DTO
             var designerDto = new DesignerRegisterDto
@@ -73,10 +87,18 @@ namespace DentalDesign.Dashboard.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message ?? "حدث خطأ أثناء التسجيل");
+
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    return PartialView("_CreatePartial", model);
+
                 return View(model);
             }
 
-            return RedirectToAction("Index"); // ارجع للـ List بعد الإنشاء
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView("_IndexPartial");
+
+            return View("Index");
         }
 
 

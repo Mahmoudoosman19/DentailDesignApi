@@ -1,0 +1,120 @@
+﻿@model List<UserManagement.Application.DTOs.UserDto>
+@{
+
+    ViewBag.Title = "Designers";
+}
+
+<h2>Designers</h2>
+
+<!-- ====================== SEARCH FORM (GET) ====================== -->
+<form method="get" asp-action="Index" class="mb-3 d-flex gap-2">
+    <input type="text"
+           name="Name"
+           value="@ViewBag.Search"
+           placeholder="Search..."
+           class="form-control"
+           style="width:200px;" />
+
+    <button type="submit" class="btn btn-primary">Search</button>
+
+    <a href="@Url.Action("Create", "Designer")" class="btn btn-success ajax-link">Add Supervisor</a>
+</form>
+
+
+
+<button type="button" class="btn btn-danger mb-2"
+        onclick='openDeleteSelected({
+            endpoint: "@Url.Action("DeleteSelected", "Designer")",
+            title: "Delete Designers",
+            messagePrefix: "designers"
+        })'>
+    Delete Selected
+</button>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="selectAll" /></th>
+            <th>Name</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Account Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var des in Model)
+        {
+            @if (des.IsDeleted == false)
+            {
+                <tr>
+                    <td><input type="checkbox" name="selectedIds" value="@des.Id" /></td>
+                    <td>
+                        <a asp-controller="Designer"
+                           asp-action="Details"
+                           asp-route-id="@des.Id">
+                            @des.FullNameEn
+                        </a>
+                    </td>
+                    <td>@des.UserName</td>
+                    <td>@des.Email</td>
+                    <td>@des.PhoneNumber</td>
+                    <td>@des.Status</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">...</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Designer" asp-action="Edit" asp-route-id="@des.Id">Edit</a></li>
+                                <!-- Delete (POST) -->
+                                <li>
+                                    <form asp-controller="Designer" asp-action="Delete" method="post">
+                                        <input type="hidden" name="id" value="@des.Id" />
+                                        <button type="button"
+                                                class="dropdown-item text-danger"
+                                                onclick="openDeleteSingle('@des.Id')">
+                                            Delete
+                                        </button>
+
+                                    </form>
+                                </li>
+                                <li><a class="dropdown-item" asp-controller="Designer" asp-action="Block" asp-route-id="@des.Id">Block</a></li>
+
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+
+
+
+<!-- ====================== PAGINATION ====================== -->
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-search="@ViewBag.Search">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+
+<!-- ====================== Select All ====================== -->
+<script>
+    document.getElementById("selectAll").addEventListener("change", function() {
+        let checkboxes = document.querySelectorAll('input[name="selectedIds"]');
+        checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+</script>
+
+<!-- ====================== Delete Modal ====================== -->
+ <script>
+    // This runs after partial load
+    bindDeleteFunctionality('@ViewBag.DeleteEndpoint');
+</script>

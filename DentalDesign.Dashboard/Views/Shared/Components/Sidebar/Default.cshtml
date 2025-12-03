@@ -131,9 +131,10 @@
         {
             var isActive = item.Controller == currentController ? "active" : "";
             <li class="@isActive">
-                <a asp-controller="@item.Controller" asp-action="@item.Action">
+                <a href="/@item.Controller/@item.Action" class="ajax-link" data-controller="@item.Controller">
                     @item.Name
                 </a>
+
             </li>
         }
     </ul>
