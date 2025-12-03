@@ -18,5 +18,6 @@ namespace UserManagement.Application.DTOs
         public DateTime CreatedOnUtc { get; set; }
         public DateTime? ModifiedOnUtc { get; set; }
         public long RoleId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

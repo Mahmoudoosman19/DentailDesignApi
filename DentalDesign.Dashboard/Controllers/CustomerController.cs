@@ -40,7 +40,12 @@ namespace DentalDesign.Dashboard.Controllers
             ViewBag.TotalPages = (int)Math.Ceiling((double)response.TotalCount! / (double)query.PageSize);
             ViewBag.SearchName = query.Name;
             ViewBag.SearchStatus = query.Status;
-            
+
+            // لو الطلب AJAX → رجّع Partial
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView("_IndexPartial", response.Data);
+
+            // لو الطلب عادي → رجّع صفحة كاملة بالـ Layout
             return View(response.Data);
         }
 

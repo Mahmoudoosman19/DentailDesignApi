@@ -19,7 +19,7 @@ namespace UserManagement.Application.Features.User.Commands.DeleteUser
             if (user == null)
                 return ResponseModel.Failure(Messages.UserNotFound);
 
-            _userRepository.Delete(user);
+            user.IsDeleted = true;
             await _userRepository.SaveChangesAsync();
 
             return ResponseModel.Success(Messages.UserDeletedSuccessfully);
