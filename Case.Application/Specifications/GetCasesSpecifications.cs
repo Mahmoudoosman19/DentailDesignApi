@@ -14,8 +14,8 @@ namespace Case.Application.Specifications
         public GetCasesSpecifications(GetCasesQuery request)
         {
             ApplyPaging(request.PageSize, request.PageIndex);
-            if (request.DesignerId != null)
-                AddCriteria(c => c.DesignertId == request.DesignerId);
+            //if (request.DesignerId != null)
+            //    AddCriteria(c => c.DesignertId == request.DesignerId);
             
             if (request.CustomerId != null)
                 AddCriteria(c => c.CustomerId == request.CustomerId);

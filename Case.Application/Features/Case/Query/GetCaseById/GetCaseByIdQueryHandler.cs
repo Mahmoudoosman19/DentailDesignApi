@@ -34,8 +34,8 @@ namespace Case.Application.Features.Case.Query.GetCaseById
 
             if (casee == null) 
                 return ResponseModel.Failure<GetCaseByIdQueryResponse>("Case Not Exist!");
-            if (currentUserRole == "Designer" && casee.DesignertId != currentUserId)
-                return ResponseModel.Failure<GetCaseByIdQueryResponse>("Unauthorized");
+            //if (currentUserRole == "Designer" && casee.DesignertId != currentUserId)
+            //    return ResponseModel.Failure<GetCaseByIdQueryResponse>("Unauthorized");
             var response = _mapper.Map<GetCaseByIdQueryResponse>(casee);
 
             return await Task.FromResult(ResponseModel.Success(response, 1));

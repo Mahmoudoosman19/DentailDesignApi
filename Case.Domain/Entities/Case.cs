@@ -12,16 +12,14 @@ namespace Case.Domain.Entities
     {
         public string CaseName { get; private set; }
         public Guid CustomerId { get; private set; }
-        public Guid? DesignertId { get; private set; }
         public DateTime CreatedOnUtc { get; set; } = DateTime.Now;
         public DateTime? ModifiedOnUtc { get; set; }
         public long StatusId { get; private set; } = 1;
         public DateTime DueDate { get;  private set; }
         public string? Description {  get; private set; }
         public CaseTypeEnum CaseType { get; private set; }
-        public DateTime AssignedAt { get; private set; }
 
-        public string? Model3DPath { get; private set; }
+        public string? CustomerScanPath { get; private set; }
         public void SetCustomerId(Guid customerId)
         {
             CustomerId = customerId;
@@ -30,10 +28,7 @@ namespace Case.Domain.Entities
         {
             CaseName = caseName;
         }
-        public void SetDesignertId(Guid designertId)
-        {
-            DesignertId = designertId;
-        }
+        
         public void SetStatus(CaseStatusEnum status)
         {
             StatusId = (long)status;    
@@ -50,10 +45,7 @@ namespace Case.Domain.Entities
         {
             DueDate = dueDate;
         }
-        public void SetAssignedAt(DateTime assignedAt)
-        {
-            AssignedAt = assignedAt;
-        }
-        public void SetModel3DPath(string path) => Model3DPath = path;
+     
+        public void SetModel3DPath(string path) => CustomerScanPath = path;
     }
 }

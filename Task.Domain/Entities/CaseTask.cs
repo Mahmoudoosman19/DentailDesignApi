@@ -10,28 +10,36 @@ namespace Task.Domain.Entities
 {
     public class CaseTask : AggregateRoot<Guid>, IAuditableEntity
     {
+        public string Title { get; private set; }
         public Guid CaseId { get; private set; }          
-        public Guid DesignerId { get; private set; }     
+        public Guid? DesignerId { get; private set; }     
 
         public DateTime? StartedAt { get; private set; }   
         public DateTime? EndedAt { get; private set; }   
 
         public TaskStatusEnum Status { get; private set; } = TaskStatusEnum.Pending;
 
+        public DateTime? AssignedAt { get; private set; }
+
         public string? Notes { get; private set; }    
 
         public DateTime CreatedOnUtc { get; set; } = DateTime.UtcNow;
         public DateTime? ModifiedOnUtc { get; set; }
+        public string? Model3DPath { get; private set; }
 
         private CaseTask() { } 
 
-        public CaseTask(Guid caseId, Guid designerId)
+        public CaseTask(Guid caseId, string title)
         {
             CaseId = caseId;
-            DesignerId = designerId;
-            Status = TaskStatusEnum.Pending;
+            Title = title;
         }
 
+        public void AssignDesigner(Guid designerId)
+        {
+            DesignerId = designerId;
+            AssignedAt = DateTime.UtcNow;
+        }
 
         public void StartTask()
         {
@@ -41,7 +49,7 @@ namespace Task.Domain.Entities
             Status = TaskStatusEnum.InProgress;
             StartedAt = DateTime.UtcNow;
         }
-
+        
         public void CompleteTask()
         {
             if (Status != TaskStatusEnum.InProgress)
@@ -56,6 +64,7 @@ namespace Task.Domain.Entities
             Notes = notes;
             ModifiedOnUtc = DateTime.UtcNow;
         }
+        public void SetModel3DPath(string path) => Model3DPath = path;
 
     }
 }

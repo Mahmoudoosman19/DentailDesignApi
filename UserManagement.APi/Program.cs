@@ -33,11 +33,12 @@ namespace DentalDesign.API
             // Add Case Strapping
             builder.Services.AddCasePresentationStrapping(builder.Configuration);
 
+            //Add Task Strapping
+            builder.Services.AddTaskStrapping(builder.Configuration);
+
             // Add User Strapping
             builder.Services.AddUserPresentationStrapping(builder.Configuration);
 
-            //Add Task Strapping
-            builder.Services.AddTaskStrapping(builder.Configuration);
 
             // Identity & Authentication Services
             builder.Services.AddIdentityHelper();
