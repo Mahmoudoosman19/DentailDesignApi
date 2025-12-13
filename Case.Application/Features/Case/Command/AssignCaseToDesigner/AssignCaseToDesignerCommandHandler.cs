@@ -13,26 +13,26 @@ using UserManagement.Application.Identity;
 
 namespace Case.Application.Features.Case.Command.AssignCaseToDesigner
 {
-    internal class AssignCaseToDesignerCommandHandler : ICommandHandler<AssignCaseToDesignerCommand>
-    {
-        private readonly ICaseUnitOfWork _uow;
+    //internal class AssignCaseToDesignerCommandHandler : ICommandHandler<AssignCaseToDesignerCommand>
+    //{
+    //    private readonly ICaseUnitOfWork _uow;
 
-        public AssignCaseToDesignerCommandHandler(ICaseUnitOfWork uow)
-        {
-            _uow = uow;
-        }
-        public async Task<ResponseModel> Handle(AssignCaseToDesignerCommand request, CancellationToken cancellationToken)
-        {
-            var caseToAssign= await _uow.Repository<Domain.Entities.Case>().GetByIdAsync(request.CaseId);
+    //    public AssignCaseToDesignerCommandHandler(ICaseUnitOfWork uow)
+    //    {
+    //        _uow = uow;
+    //    }
+    //    public async Task<ResponseModel> Handle(AssignCaseToDesignerCommand request, CancellationToken cancellationToken)
+    //    {
+    //        var caseToAssign= await _uow.Repository<Domain.Entities.Case>().GetByIdAsync(request.CaseId);
             
-            if (caseToAssign == null)
-                return ResponseModel.Failure("Case Not Exist!");
+    //        if (caseToAssign == null)
+    //            return ResponseModel.Failure("Case Not Exist!");
 
-            caseToAssign.SetDesignertId(request.DesignerId);
-            caseToAssign.SetAssignedAt(DateTime.Now);
-            await _uow.CompleteAsync();
+    //        caseToAssign.SetDesignertId(request.DesignerId);
+    //        caseToAssign.SetAssignedAt(DateTime.Now);
+    //        await _uow.CompleteAsync();
 
-            return ResponseModel.Success();
-        }
-    }
+    //        return ResponseModel.Success();
+    //    }
+    //}
 }

@@ -10,10 +10,10 @@ namespace Case.Application.Specifications
 {
     internal class GetCasesAssignedToDesignerSpecifications : Specification<Domain.Entities.Case>
     {
-        public GetCasesAssignedToDesignerSpecifications(GetCasesAssignedToDesignerQuery request)
-        {
-            ApplyPaging(request.PageSize, request.PageIndex);
-            AddCriteria(c=>c.DesignertId == request.DesignerId);
-        }
+        //public GetCasesAssignedToDesignerSpecifications(GetCasesAssignedToDesignerQuery request)
+        //{
+        //    ApplyPaging(request.PageSize, request.PageIndex);
+        //    AddCriteria(c=>c.DesignertId == request.DesignerId);
+        //}
     }
 }

@@ -1,0 +1,16 @@
+﻿using Common.Application.Abstractions.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task.Application.Features.CaseTask.Query.GetTasks
+{
+    public class GetTasksQuery : IQuery<IReadOnlyList<GetTasksQueryResponse>>
+    {
+        public int PageSize { get; set; } = 20;
+        public int PageIndex { get; set; } = 1;
+        public Guid? DesignerId { get; set; }
+    }
+}

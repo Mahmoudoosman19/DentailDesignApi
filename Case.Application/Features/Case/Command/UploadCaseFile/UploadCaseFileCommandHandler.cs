@@ -15,7 +15,7 @@ namespace Case.Application.Features.Case.Command.UploadCaseFile
     internal class UploadCaseFileCommandHandler : ICommandHandler<UploadCaseFileCommand, string>
     {
         private readonly IFileStorageService _storage;
-        private readonly ICaseUnitOfWork _uow; // افترض عندك Repository للـ Case
+        private readonly ICaseUnitOfWork _uow; 
 
         public UploadCaseFileCommandHandler(IFileStorageService storage, ICaseUnitOfWork uow)
         {
