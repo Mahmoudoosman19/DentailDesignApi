@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalDesign.API", "UserManagement.APi\DentalDesign.API.csproj", "{39226030-9661-4F84-B568-2519C4736D42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dento.API", "UserManagement.APi\Dento.API.csproj", "{39226030-9661-4F84-B568-2519C4736D42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Case.Service", "Case.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileService", "FileService\FileService.csproj", "{3E564FB9-6D76-4E0A-B7AA-B2C2141B667F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalDesign.Dashboard", "DentalDesign.Dashboard\DentalDesign.Dashboard.csproj", "{1EE82506-B91F-44F7-ADA4-508E1168A21A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dento.Dashboard", "DentalDesign.Dashboard\Dento.Dashboard.csproj", "{1EE82506-B91F-44F7-ADA4-508E1168A21A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task", "Task", "{BE481912-B8AC-47D6-ADEB-11560819B7D9}"
 EndProject
